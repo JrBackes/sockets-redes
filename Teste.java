@@ -45,7 +45,6 @@ public static void main(String[] args) {
         int idJogo = teclado.nextInt();
         //Pegar restante das variaveis necessárias para uma aposta
         System.out.println("Digite o ID do jogo que deseja apostar:");
-
     }
 
 }
