@@ -67,6 +67,7 @@ public class Jogo{
     }
 
     public void getResultado(){
+        System.out.println("Resumo da Aposta: ");
         System.out.println("ID: " + getId() + " | "+ getMandante() + " " + getGolsMandante() + " x " + getGolsVisitante() +" "+getVisitante() + " ---------- Data: " + getData());
     }
     

@@ -84,6 +84,7 @@ public static void main(String[] args) {
 
 
     Aposta aposta = new Aposta(idAposta++, jogoAposta, golsMandante, golsVisitante, user1, "01/08/2022");
+    aposta.getResumoAposta();
 
 
 }

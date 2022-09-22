@@ -60,5 +60,10 @@ public class Aposta{
         return usuario;
     }
 
+    public void getResumoAposta(){
+        System.out.println("Id: " + id);
+        System.out.println("Aposta: " + jogo.getMandante() + " " + getGolsMandante() + " x " + getGolsVisitante() + " " + jogo.getVisitante() + " - " + jogo.getData() );
+
+    }
 
 }
