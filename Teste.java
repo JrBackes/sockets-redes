@@ -8,6 +8,11 @@ public static void main(String[] args) {
     int escolha = 1;
     Aposta[] apostas = new Aposta[6];
     Scanner teclado = new Scanner(System.in);
+    int idJogo = 0;
+    int idAposta = 0;
+    Jogo jogoAposta = null;
+    int golsMandante = 0;
+    int golsVisitante = 0;
 
     // Criação dos Jogos
     jogos[0] = new Jogo(1,"Internacional","Bahia","21/09/2022",2,3);
@@ -20,16 +25,16 @@ public static void main(String[] args) {
    
     Usuario user1 = new Usuario(1, "junior", "aabb");
 
-    Aposta aposta = new Aposta(1, jogos[1], 2, 3, user1, "01/08/2022");
+    
     
     // Menu
-    // Opção 1 - Ver todos resultados;
+    // OK - Opção 1 - Ver todos resultados;
         // Fazer validação sobre os jogos que ele já apostou;
         // Mostrar somente após a data;
-    // Opção 2 - Ver todas as partidas;
-    // Opção 3 - Fazer apostas;
+    // OK - Opção 2 - Ver todas as partidas;
+    // OK - Opção 3 - Fazer apostas;
 
-    //Fazer contador para ser o id da aposta
+    // OK - Fazer contador para ser o id da aposta
 
     // Estrutura Menu
     System.out.println("Selecione uma opção abaixo:");
@@ -37,33 +42,49 @@ public static void main(String[] args) {
     System.out.println("2 - Ver partidas");
     System.out.println("3 - Fazer aposta");
     escolha = teclado.nextInt();
-    if (escolha == 1) {
-        //Inserir validação para ver somente partidas que já foram feitas apostas para aquele usuário
-        for(int i=0; i<jogos.length;i++){
-            jogos[i].getResultado();
-        }
-    } else if (escolha == 2){
-        //Inserir validação para ver somente partidas disponiveis para aposta
-        for(int i=0; i<jogos.length;i++){
-            jogos[i].getPartida();
-        }
-    } else if (escolha == 3){
-        System.out.println("Digite o ID do jogo que deseja apostar:");
-        int idJogo = teclado.nextInt();
-        Jogo jogoAposta = null;
-            if(idJogo != 0){
-                for(int i=0;i<jogos.length;i++){
-                    if (idJogo == jogos[i].getId()){
-                        jogoAposta = jogos[i];
-                    }
-                }
-                System.out.println(jogoAposta);
-                jogoAposta.getPartida();
+
+   
+        if (escolha == 1) {
+            //Inserir validação para ver somente partidas que já foram feitas apostas para aquele usuário
+            for(int i=0; i<jogos.length;i++){
+                jogos[i].getResultado();
             }
-        //Pegar restante das variaveis necessárias para uma aposta
-        System.out.println("Digite o ID do jogo que deseja apostar:");
+        } else if (escolha == 2){
+            //Inserir validação para ver somente partidas disponiveis para aposta
+            for(int i=0; i<jogos.length;i++){
+                jogos[i].getPartida();
+            }
+        } else if (escolha == 3){
+            
+            while (idJogo <= 0 || idJogo > jogos.length-1){
+                System.out.println("Digite o ID do jogo que deseja apostar:");
+                idJogo = teclado.nextInt();
+                    if(idJogo > 0 && idJogo < jogos.length-1){
+                        for(int i=0;i<jogos.length-1;i++){
+                            int id = jogos[i].getId();
+                            if (jogoAposta == null){
+                                if (idJogo == id){
+                                    jogoAposta = jogos[i];
+                                }
+                            }
+                        }
+                        System.out.println("Partida a ser feita a aposta:");
+                        jogoAposta.getPartida();
+                        
+                    }else {
+                        System.out.println("Partida não encotrada, insira outro jogo");
+                    }
     }
+    System.out.println("Agora você pode nos passar o placar");
+        System.out.println("Gols para o time da casa '" + jogoAposta.getMandante() + "' :");
+        golsMandante = teclado.nextInt();
+        System.out.println("Gols para o time visitante '" + jogoAposta.getVisitante() + "' :");
+        golsVisitante = teclado.nextInt();
+}
+
+
+    Aposta aposta = new Aposta(idAposta++, jogoAposta, golsMandante, golsVisitante, user1, "01/08/2022");
+
 
 }
-//teste comentario
 }
