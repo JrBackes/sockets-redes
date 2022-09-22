@@ -34,7 +34,7 @@ public static void main(String[] args) {
         }
     } else if (escolha == 2){
         for(int i=0; i<jogos.length;i++){
-            jogos[i].getPartida();
+            jogos[i].getPartida();}
     } else if (escolha == 3){
         System.out.println("Digite o ID do jogo que deseja apostar:");
         int idJogo = teclado.nextInt();
