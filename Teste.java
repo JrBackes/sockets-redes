@@ -4,15 +4,25 @@ public class Teste{
 
 public static void main(String[] args) {
 
+    // Arrays utilizados
     Jogo[] jogos = new Jogo[6];
-    int escolha = 1;
     Aposta[] apostas = new Aposta[6];
+
+    // Leitura do teclado
     Scanner teclado = new Scanner(System.in);
-    int idJogo = 0;
-    int idAposta = 0;
+
+    //Váriaveis
+    int escolha = 0;
+    int idJogo = 1;
+    int idAposta = 1;
+    int idUser = 1;
     Jogo jogoAposta = null;
     int golsMandante = 0;
     int golsVisitante = 0;
+    String usuario = null;
+    String senha = null;
+
+    //
 
     // Criação dos Jogos
     jogos[0] = new Jogo(1,"Internacional","Bahia","21/09/2022",2,3);
@@ -22,8 +32,13 @@ public static void main(String[] args) {
     jogos[4] = new Jogo(5,"Brasil de Pelotas","Palmeiras","12/10/2022",1,0);
     jogos[5] = new Jogo(6,"Juventude","Caxias","01/08/2022",1,1);
 
+    System.out.println("Processo de Login: ");
+    System.out.println("Digite seu usuário: ");
+    usuario = teclado.next();
+    System.out.println("Digite sua senha: ");
+    senha = teclado.next();
    
-    Usuario user1 = new Usuario(1, "junior", "aabb");
+    Usuario user1 = new Usuario(idUser++,usuario, senha);
 
     
     
@@ -41,6 +56,7 @@ public static void main(String[] args) {
     System.out.println("1 - Ver resultados");
     System.out.println("2 - Ver partidas");
     System.out.println("3 - Fazer aposta");
+    System.out.println("4 - Ver minhas apostas");
     escolha = teclado.nextInt();
 
    
@@ -80,12 +96,20 @@ public static void main(String[] args) {
         golsMandante = teclado.nextInt();
         System.out.println("Gols para o time visitante '" + jogoAposta.getVisitante() + "' :");
         golsVisitante = teclado.nextInt();
-}
-
+    }else if (escolha == 4){
+    
+        
+    }
 
     Aposta aposta = new Aposta(idAposta++, jogoAposta, golsMandante, golsVisitante, user1, "01/08/2022");
     aposta.getResumoAposta();
-
+    
+    for(int i=0;i<apostas.length;i++){
+        if (apostas[i] == null){
+            apostas[i] = aposta;
+            break;
+        }
+    }
 
 }
 }
