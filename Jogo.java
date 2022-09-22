@@ -1,5 +1,3 @@
-import java.net.IDN;
-
 public class Jogo{
     
     private int id;
@@ -63,11 +61,14 @@ public class Jogo{
         return golsVis;
     }
 
-    public void getPartidaAposta(){
-        System.out.println("ID: " + getId() + " | "+ getMandante() +" x " + getVisitante() + " ||||| Data: " + getData());
+    public void getPartida(){
+        System.out.println("ID: " + getId() + " | "+ getMandante() +" x " + getVisitante() + " ---------- Data: " + getData());
 
     }
 
+    public void getResultado(){
+        System.out.println("ID: " + getId() + " | "+ getMandante() + " " + getGolsMandante() + " x " + getGolsVisitante() +" "+getVisitante() + " ---------- Data: " + getData());
+    }
     
 
 }
