@@ -13,7 +13,7 @@ public static void main(String[] args) {
 
     //Váriaveis
     int escolha = 0;
-    int idJogo = 1;
+    int idJogo = 0;
     int idAposta = 1;
     int idUser = 1;
     Jogo jogoAposta = null;
@@ -21,6 +21,8 @@ public static void main(String[] args) {
     int golsVisitante = 0;
     String usuario = null;
     String senha = null;
+
+    Aposta aposta = null;
 
     //
 
@@ -38,7 +40,7 @@ public static void main(String[] args) {
     System.out.println("Digite sua senha: ");
     senha = teclado.next();
    
-    Usuario user1 = new Usuario(idUser++,usuario, senha);
+    Usuario user = new Usuario(idUser++,usuario, senha);
 
     
     
@@ -59,7 +61,7 @@ public static void main(String[] args) {
     System.out.println("4 - Ver minhas apostas");
     escolha = teclado.nextInt();
 
-   
+   while(escolha != 99){
         if (escolha == 1) {
             //Inserir validação para ver somente partidas que já foram feitas apostas para aquele usuário
             for(int i=0; i<jogos.length;i++){
@@ -91,17 +93,27 @@ public static void main(String[] args) {
                         System.out.println("Partida não encotrada, insira outro jogo");
                     }
     }
-    System.out.println("Agora você pode nos passar o placar");
-        System.out.println("Gols para o time da casa '" + jogoAposta.getMandante() + "' :");
-        golsMandante = teclado.nextInt();
-        System.out.println("Gols para o time visitante '" + jogoAposta.getVisitante() + "' :");
-        golsVisitante = teclado.nextInt();
+                    System.out.println("Agora você pode nos passar o placar");
+                    System.out.println("Gols para o time da casa '" + jogoAposta.getMandante() + "' :");
+                    golsMandante = teclado.nextInt();
+                    System.out.println("Gols para o time visitante '" + jogoAposta.getVisitante() + "' :");
+                    golsVisitante = teclado.nextInt();
+
     }else if (escolha == 4){
-    
+        for(int i=0;i<apostas.length;i++){
+            int cont = 0;
+            if(apostas[i].getUsuario() == user){
+                System.out.println("Apostas do usuário " + user.getUsuario());
+                apostas[i].getResumoAposta();
+                cont++;
+            } else if (cont == 0){
+                System.out.println("O usuário " + user.getUsuario() +" não tem nenhuma aposta confirmada");
+            }
+        }
         
     }
 
-    Aposta aposta = new Aposta(idAposta++, jogoAposta, golsMandante, golsVisitante, user1, "01/08/2022");
+    aposta = new Aposta(idAposta++, jogoAposta, golsMandante, golsVisitante, user, "01/08/2022");
     aposta.getResumoAposta();
     
     for(int i=0;i<apostas.length;i++){
@@ -111,5 +123,6 @@ public static void main(String[] args) {
         }
     }
 
+}
 }
 }
