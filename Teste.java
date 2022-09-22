@@ -32,17 +32,34 @@ public static void main(String[] args) {
     //Fazer contador para ser o id da aposta
 
     // Estrutura Menu
+    System.out.println("Selecione uma opção abaixo:");
+    System.out.println("1 - Ver resultados");
+    System.out.println("2 - Ver partidas");
+    System.out.println("3 - Fazer aposta");
+    escolha = teclado.nextInt();
     if (escolha == 1) {
+        //Inserir validação para ver somente partidas que já foram feitas apostas para aquele usuário
         for(int i=0; i<jogos.length;i++){
             jogos[i].getResultado();
         }
     } else if (escolha == 2){
+        //Inserir validação para ver somente partidas disponiveis para aposta
         for(int i=0; i<jogos.length;i++){
             jogos[i].getPartida();
         }
     } else if (escolha == 3){
         System.out.println("Digite o ID do jogo que deseja apostar:");
         int idJogo = teclado.nextInt();
+        Jogo jogoAposta = null;
+            if(idJogo != 0){
+                for(int i=0;i<jogos.length;i++){
+                    if (idJogo == jogos[i].getId()){
+                        jogoAposta = jogos[i];
+                    }
+                }
+                System.out.println(jogoAposta);
+                jogoAposta.getPartida();
+            }
         //Pegar restante das variaveis necessárias para uma aposta
         System.out.println("Digite o ID do jogo que deseja apostar:");
     }
