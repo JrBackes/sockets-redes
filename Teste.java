@@ -17,6 +17,11 @@ public static void main(String[] args) {
     jogos[4] = new Jogo(5,"Brasil de Pelotas","Palmeiras","12/10/2022",1,0);
     jogos[5] = new Jogo(6,"Juventude","Caxias","01/08/2022",1,1);
 
+   
+    Usuario user1 = new Usuario(1, "junior", "aabb");
+
+    Aposta aposta = new Aposta(1, jogos[1], 2, 3, user1, "01/08/2022");
+    
     // Menu
     // Opção 1 - Ver todos resultados;
         // Fazer validação sobre os jogos que ele já apostou;
@@ -24,22 +29,23 @@ public static void main(String[] args) {
     // Opção 2 - Ver todas as partidas;
     // Opção 3 - Fazer apostas;
 
-    Usuario user1 = new Usuario(1, "junior", "aabb");
+    //Fazer contador para ser o id da aposta
 
-    Aposta aposta = new Aposta(1, jogos[1], 2, 3, user1, "01/08/2022");
-    
+    // Estrutura Menu
     if (escolha == 1) {
         for(int i=0; i<jogos.length;i++){
             jogos[i].getResultado();
         }
     } else if (escolha == 2){
         for(int i=0; i<jogos.length;i++){
-            jogos[i].getPartida();}
+            jogos[i].getPartida();
+        }
     } else if (escolha == 3){
         System.out.println("Digite o ID do jogo que deseja apostar:");
         int idJogo = teclado.nextInt();
-        
+        //Pegar restante das variaveis necessárias para uma aposta
         System.out.println("Digite o ID do jogo que deseja apostar:");
+
     }
 
 }
