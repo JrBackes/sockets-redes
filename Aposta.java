@@ -28,10 +28,12 @@ public class Aposta{
         System.out.println("Jogo: " + jogo.getId() + " | " + jogo.getMandante() + " x " + jogo.getVisitante());
     }
 
+    // Ajustar a função para setar a DATA (Pode ser usando o tipo Data ou SPLIT)
      public void setData(String data){
         this.data = data;
     }
     
+    // Ajustar a função para setar a DATA (Pode ser usando o tipo Data ou SPLIT)
     public String getData(){
         return data;
     }
