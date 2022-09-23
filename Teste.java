@@ -1,8 +1,10 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Teste{
 
-public static void main(String[] args) {
+public static void main(String[] args) throws ParseException {
 
     // Arrays utilizados
     Jogo[] jogos = new Jogo[6];
@@ -27,12 +29,12 @@ public static void main(String[] args) {
     //
 
     // Criação dos Jogos
-    jogos[0] = new Jogo(1,"Internacional","Bahia","21/09/2022",2,3);
-    jogos[1] = new Jogo(2,"Grêmio","Vasco","25/09/2022",1,2);
-    jogos[2] = new Jogo(3,"São Paulo","Corinthians","30/09/2022",4,1);
-    jogos[3] = new Jogo(4,"Flamengo","Fluminense","10/10/2022",3,1);
-    jogos[4] = new Jogo(5,"Brasil de Pelotas","Palmeiras","12/10/2022",1,0);
-    jogos[5] = new Jogo(6,"Juventude","Caxias","01/08/2022",1,1);
+    jogos[0] = new Jogo(1,"Internacional","Bahia","21/08/2022",2,3);
+    jogos[1] = new Jogo(2,"Grêmio","Vasco","25/08/2022",1,2);
+    jogos[2] = new Jogo(3,"São Paulo","Corinthians","30/08/2022",4,1);
+    jogos[3] = new Jogo(4,"Flamengo","Fluminense","10/08/2022",3,1);
+    jogos[4] = new Jogo(5,"Brasil de Pelotas","Palmeiras","12/08/2022",1,0);
+    jogos[5] = new Jogo(6,"Juventude","Caxias","01/10/2022",1,1);
 
     System.out.println("Processo de Login: ");
     System.out.println("Digite seu usuário: ");
@@ -68,13 +70,31 @@ public static void main(String[] args) {
             
         } else if (escolha == 2){
             //Inserir validação para ver somente partidas disponiveis para aposta
-            for(int i=0; i<jogos.length;i++){
+             //verificar a data do jogo, converte data string em data
+             int cont = 0;
+             for(int i=0; i<jogos.length;i++){
+                
+                final Date dataAtual = new Date();
+                final SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                final Date dataJogo = formato.parse(jogos[i].getData());
+                if(dataAtual.before(dataJogo)){
                 jogos[i].getPartida();
+                cont++;                
+                }
+            }
+
+            if(cont==0){
+                System.out.println("Infelismente não há partidas para exibir");
             }
         } else if (escolha == 3){
         
                 System.out.println("Digite o ID do jogo que deseja apostar:");
                 idJogo = teclado.nextInt();
+                final Date dataAtual = new Date();
+                final SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                try{ //trata o erro caso seja inserida uma ID de jogo invalida
+                final Date dataJogo = formato.parse(jogos[idJogo].getData());
+                if(dataAtual.before(dataJogo)){ //verifica se a data do jogo escolhido é valida
                     if(idJogo > 0 && idJogo < jogos.length-1){
                         for(int i=0;i<jogos.length-1;i++){
                             int id = jogos[i].getId();
@@ -82,17 +102,27 @@ public static void main(String[] args) {
                                     jogoAposta = jogos[i];
                                 }
                         }
+                    }
+                
                         System.out.println("Partida a ser feita a aposta:");
                         jogoAposta.getPartida();
                         
                     }else {
-                        System.out.println("Partida não encotrada, insira outro jogo");
+                        System.out.println("A DATA do jogo escolhido é invalida");
                     }
+                    //teria que retornar para ecolher outra ID
                     System.out.println("Agora você pode nos passar o placar");
                     System.out.println("Gols para o time da casa '" + jogoAposta.getMandante() + "' :");
                     golsMandante = teclado.nextInt();
                     System.out.println("Gols para o time visitante '" + jogoAposta.getVisitante() + "' :");
                     golsVisitante = teclado.nextInt();
+                    
+                }catch(ArrayIndexOutOfBoundsException e){
+                    System.out.println("Partida não encotrada, insira outro jogo");
+            }
+            //teria que retornar para ecolher outra ID
+                           
+        
             
     }else if (escolha == 4){
         for(int i=0;i<apostas.length;i++){
@@ -115,6 +145,6 @@ public static void main(String[] args) {
             break;
         }
     }
-
+    teclado.close();
 }
 }
