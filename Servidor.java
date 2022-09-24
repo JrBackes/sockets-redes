@@ -10,13 +10,14 @@ public class Servidor {
         // Usado durante o código
         Jogo[] jogos = new Jogo[6];
         Aposta[] apostas = new Aposta[6];
+        Usuario user;
 
         //Criação da conexão
         ServerSocket socketRecepcao = new ServerSocket(6789);
         System.out.println("Servidor ouvindo a porta 6789");
 
         Socket cliente = socketRecepcao.accept();
-        System.out.println("Cliente conectado: " + cliente.getInetAddress().getHostAddress());
+        //System.out.println("Cliente conectado: " + cliente.getInetAddress().getHostAddress());
 
         jogos[0] = new Jogo(1, "Internacional", "Bahia", "21/08/2022", 2, 3);
         jogos[1] = new Jogo(2, "Grêmio", "Vasco", "25/08/2022", 1, 2);
@@ -25,7 +26,12 @@ public class Servidor {
         jogos[4] = new Jogo(5, "Brasil de Pelotas", "Palmeiras", "12/10/2022", 1, 0);
         jogos[5] = new Jogo(6, "Juventude", "Caxias", "01/10/2022", 1, 1);
 
+        ObjectInputStream input = new ObjectInputStream(cliente.getInputStream());
 
+        user = (Usuario) input.readObject();
+        System.out.println("Usuário: " + user.getUsuario() + " Pass: " + user.getPassword());
+
+        cliente.close();
 
     }
 }

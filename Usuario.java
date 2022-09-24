@@ -1,4 +1,6 @@
-public class Usuario {
+import java.io.*;
+
+public class Usuario implements Serializable{
 
     int id;
     String usuario;

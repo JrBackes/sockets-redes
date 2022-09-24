@@ -20,7 +20,7 @@ public class Cliente1 {
         ObjectOutputStream output;
 
         // Inicialização da conexão
-        Socket Cliente = new Socket("127.0.0.1", 6789);
+        Socket cliente = new Socket("127.0.0.1", 6789);
 
         //Processo de criação do usuário
         System.out.println("-------------------------");
@@ -31,12 +31,11 @@ public class Cliente1 {
 
         Usuario user = new Usuario(idUser++, usuario, senha);
 
+        output = new ObjectOutputStream(cliente.getOutputStream());
+        output.writeObject(user);
+        output.flush();
+        output.close();
 
-
-
-
-
-
-
+        cliente.close();
     }
 }
