@@ -65,6 +65,7 @@ public class Aposta{
     public void getResumoAposta(){
         System.out.println("Id: " + id);
         System.out.println("Aposta: " + jogo.getMandante() + " " + getGolsMandante() + " x " + getGolsVisitante() + " " + jogo.getVisitante() + " - " + jogo.getData() );
+        System.out.println("Data da Aposta: " + getData()); //exibe data da realização do jogo
 
     }
 
