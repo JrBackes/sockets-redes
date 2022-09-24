@@ -7,26 +7,24 @@ public class Teste {
     public static void main(String[] args) throws ParseException {
 
         // Arrays utilizados
-        Jogo[] jogos = new Jogo[6];
-        Aposta[] apostas = new Aposta[6];
+        Jogo[] jogos = new Jogo[6]; // Servidor
+        Aposta[] apostas = new Aposta[6]; // Servidor
 
         // Leitura do teclado
-        Scanner teclado = new Scanner(System.in);
+        Scanner teclado = new Scanner(System.in); // Cliente
 
         // Váriaveis
         int escolha = 0;
         int idJogo = 0;
         int idAposta = 1;
-        int idUser = 1;
         Jogo jogoAposta = null;
         int golsMandante = 0;
         int golsVisitante = 0;
-        String usuario = null;
-        String senha = null;
+        String usuario = null; // Servidor
+        String senha = null; // Servidor
+        int idUser = 1; // Servidor
 
         Aposta aposta = null;
-
-        //
 
         // Criação dos Jogos
         jogos[0] = new Jogo(1, "Internacional", "Bahia", "21/08/2022", 2, 3);
