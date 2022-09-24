@@ -1,5 +1,6 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.text.DateFormat;
 import java.util.*;
 
 public class Teste {
@@ -63,9 +64,21 @@ public class Teste {
 
             if (escolha == 1) {
 
-                // Validação de jogos que  passaram
+                // Validação de jogos que  passaram **** FEITO
+                int cont1 = 0;
                 for (int i = 0; i < jogos.length; i++) {
-                    jogos[i].getResultado();
+                    final Date dataAtual = new Date();
+                    final SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                    final Date dataJogo = formato.parse(jogos[i].getData());
+                    if (!dataAtual.before(dataJogo)) {
+                        jogos[i].getResultado();
+                        cont1++;
+                    }
+                    if (cont1 == 0) {
+                        System.out.println("  ");
+                        System.out.println("Não há partidas para exibir");
+                    }
+                    
                 }
 
             } else if (escolha == 2) {
@@ -97,8 +110,8 @@ public class Teste {
                     final SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                     try { // trata o erro caso seja inserida uma ID de jogo invalida
                         final Date dataJogo = formato.parse(jogos[idJogo - 1].getData());
-                        // Formatar a Data para exibição
-                        System.out.println(dataJogo);
+                        // Formatar a Data para exibição***FEITO
+                        System.out.println(jogos[idJogo - 1].getData());
                         if (dataAtual.before(dataJogo)) { // verifica se a data do jogo escolhido é valida
                             if (idJogo > 0 && idJogo <= jogos.length + 1) {
                                 for (int i = 0; i < jogos.length; i++) {
@@ -135,7 +148,11 @@ public class Teste {
                 System.out.println("Gols para o time visitante '" + jogoAposta.getVisitante() + "' :");
                 golsVisitante = teclado.nextInt();
 
-                aposta = new Aposta(idAposta++, jogoAposta, golsMandante, golsVisitante, user, "24/09/2022");
+                //CONVERTER DATAAPOSTA EM STRING ***** FEITO
+                Date dataAtual = new Date();
+                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                String dataAposta = dateFormat.format(dataAtual);
+                aposta = new Aposta(idAposta++, jogoAposta, golsMandante, golsVisitante, user, dataAposta);
                 aposta.getResumoAposta();
                 // Adiciona a aposta no array de apostas
                 for (int i = 0; i < apostas.length; i++) {
@@ -148,8 +165,10 @@ public class Teste {
 
                 // teria que retornar para ecolher outra ID
 
+
             } else if (escolha == 4) {
-               // Inserir o Try Catch para informar que estas são todas as apostas. (NullPointer)
+
+               try {
                 for (int i = 0; i < apostas.length; i++) {
                     if (apostas[i].getUsuario() == user) {
                         System.out.println("Apostas do usuário " + user.getUsuario());
@@ -157,6 +176,10 @@ public class Teste {
                         
                     }
                 }
+            }catch(NullPointerException e ){
+                System.out.println(" ");
+                System.out.println("Estas são todas as suas apostas");
+            }
             }
 
         }

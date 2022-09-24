@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Teste",
+            "request": "launch",
+            "mainClass": "Teste",
+            "projectName": "sockets-redes_9e4bd00b"
+        },
+        {
+            "type": "java",
             "name": "Launch Cliente1",
             "request": "launch",
             "mainClass": "Cliente1",
