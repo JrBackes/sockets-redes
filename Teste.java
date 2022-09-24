@@ -54,23 +54,24 @@ public class Teste {
         // OK - Fazer contador para ser o id da aposta
         // Estrutura Menu
         while (escolha != 99) {
+            System.out.println("  ");
             System.out.println("Selecione uma opção abaixo:");
             System.out.println("1 - Ver resultados");
             System.out.println("2 - Ver partidas");
             System.out.println("3 - Fazer aposta");
             System.out.println("4 - Ver minhas apostas");
+            System.out.println("99 - Para sair");
             escolha = teclado.nextInt();
 
             if (escolha == 1) {
-                // Inserir validação para ver somente partidas que já foram feitas apostas para
-                // aquele usuário
+
+                // Validação de jogos que  passaram
                 for (int i = 0; i < jogos.length; i++) {
                     jogos[i].getResultado();
                 }
 
             } else if (escolha == 2) {
-                // Inserir validação para ver somente partidas disponiveis para aposta
-                // verificar a data do jogo, converte data string em data
+                // OK
                 int cont = 0;
                 for (int i = 0; i < jogos.length; i++) {
 
@@ -84,12 +85,14 @@ public class Teste {
                 }
 
                 if (cont == 0) {
+                    System.out.println("  ");
                     System.out.println("Infelizmente não há partidas para exibir");
                 }
             } else if (escolha == 3) {
                 int valido = 0;
 
                 while (valido == 0) {
+                    System.out.println("  ");
                     System.out.println("Digite o ID do jogo que deseja apostar:");
                     idJogo = teclado.nextInt();
                     final Date dataAtual = new Date();
@@ -117,25 +120,29 @@ public class Teste {
                             jogoAposta.getPartida();
 
                         } else {
+                            System.out.println("  ");
                             System.out.println("A DATA do jogo escolhido é invalida");
                             valido = 0;
                         }
                     } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("  ");
                         System.out.println("Partida não encotrada, insira outro jogo");
                     }
                 }
                 // teria que retornar para ecolher outra ID
+                System.out.println("  ");
                 System.out.println("Agora você pode nos passar o placar");
                 System.out.println("Gols para o time da casa '" + jogoAposta.getMandante() + "' :");
                 golsMandante = teclado.nextInt();
                 System.out.println("Gols para o time visitante '" + jogoAposta.getVisitante() + "' :");
                 golsVisitante = teclado.nextInt();
 
-                aposta = new Aposta(idAposta++, jogoAposta, golsMandante, golsVisitante, user, "01/08/2022");
+                aposta = new Aposta(idAposta++, jogoAposta, golsMandante, golsVisitante, user, "24/09/2022");
                 aposta.getResumoAposta();
                 // Adiciona a aposta no array de apostas
                 for (int i = 0; i < apostas.length; i++) {
                     if (apostas[i] == null) {
+                        System.out.println("Inserindo nas apostas: " + aposta);
                         apostas[i] = aposta;
                         break;
                     }
@@ -144,19 +151,16 @@ public class Teste {
                 // teria que retornar para ecolher outra ID
 
             } else if (escolha == 4) {
+               // Inserir o Try Catch para informar que estas são todas as apostas. (NullPointer)
                 for (int i = 0; i < apostas.length; i++) {
-                    int cont = 0;
-                    if (cont == 0) {
-                        System.out.println("O usuário " + user.getUsuario() + " não tem nenhuma aposta confirmada");
-                    } else if (apostas[i].getUsuario() == user) {
+                    if (apostas[i].getUsuario() == user) {
                         System.out.println("Apostas do usuário " + user.getUsuario());
                         apostas[i].getResumoAposta();
-                        cont++;
+                        
                     }
                 }
             }
 
-            teclado.close();
         }
     }
 }
