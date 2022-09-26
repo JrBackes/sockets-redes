@@ -28,16 +28,20 @@ public class Servidor {
         jogos[4] = new Jogo(5, "Brasil de Pelotas", "Palmeiras", "12/10/2022", 1, 0);
         jogos[5] = new Jogo(6, "Juventude", "Caxias", "01/10/2022", 1, 1);
 
-        InputStreamReader inputReader = new InputStreamReader(cliente.getInputStream());
-        BufferedReader reader = new BufferedReader(inputReader);
-        ObjectInputStream objeto = new ObjectInputStream(cliente.getInputStream());
+        //*InputStreamReader inputReader = new InputStreamReader(cliente.getInputStream());
+        //*BufferedReader reader = new BufferedReader(inputReader);
+        //*ObjectInputStream objeto = new ObjectInputStream(cliente.getInputStream());
+        //*ObjectInputStream BufferedInputStream = objeto;
+        ObjectInputStream recebe = new ObjectInputStream(cliente.getInputStream());
+        ObjectOutputStream envia = new ObjectOutputStream(cliente.getOutputStream());
+
         // Colocar o objeto na VAR user;
-        String x;
-        PrintStream saida = new PrintStream(cliente.getOutputStream());
-        
-        while ((x = reader.readLine()) != null){
-            System.out.println("Server: " + x);
-            saida.println(menu);
+        //*String x;
+        //*PrintStream saida = new PrintStream(cliente.getOutputStream());
+        System.out.println("AQUI");//teste para veer se chegava aqui
+        while (recebe != null){
+            System.out.println("Server: " + recebe.readUTF());
+            envia.writeBytes(menu);
 
                      
             
