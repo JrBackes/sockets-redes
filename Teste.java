@@ -41,7 +41,7 @@ public class Teste {
         System.out.println("Digite sua senha: ");
         senha = teclado.next();
 
-        Usuario user = new Usuario(idUser++, usuario, senha);
+        Usuario user = new Usuario(idUser++, usuario, senha); // Até aqui ok no server
 
         // Menu
         // OK - Opção 1 - Ver todos resultados;
@@ -162,10 +162,6 @@ public class Teste {
                         break;
                     }
                 }
-
-                // teria que retornar para ecolher outra ID
-
-
             } else if (escolha == 4) {
 
                try {

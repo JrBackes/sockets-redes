@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.*;
+import java.nio.Buffer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -11,6 +12,7 @@ public class Servidor {
         Jogo[] jogos = new Jogo[6];
         Aposta[] apostas = new Aposta[6];
         Usuario user;
+        String menu = "Selecione uma opção abaixo: /n 1 - Ver resultados) /n 2 - Ver partidas /n 3 - Fazer aposta /n 4 - Ver minhas apostas /n 99 - Para sair"; ;
 
         //Criação da conexão
         ServerSocket socketRecepcao = new ServerSocket(6789);
@@ -26,10 +28,28 @@ public class Servidor {
         jogos[4] = new Jogo(5, "Brasil de Pelotas", "Palmeiras", "12/10/2022", 1, 0);
         jogos[5] = new Jogo(6, "Juventude", "Caxias", "01/10/2022", 1, 1);
 
-        ObjectInputStream input = new ObjectInputStream(cliente.getInputStream());
+        InputStreamReader inputReader = new InputStreamReader(cliente.getInputStream());
+        BufferedReader reader = new BufferedReader(inputReader);
+        ObjectInputStream objeto = new ObjectInputStream(cliente.getInputStream());
+        // Colocar o objeto na VAR user;
+        String x;
+        PrintStream saida = new PrintStream(cliente.getOutputStream());
+        
+        while ((x = reader.readLine()) != null){
+            System.out.println("Server: " + x);
+            saida.println(menu);
 
-        user = (Usuario) input.readObject();
-        System.out.println("Usuário: " + user.getUsuario() + " Pass: " + user.getPassword());
+                     
+            
+            
+            
+            
+        }
+        
+
+
+       // user = (Usuario) input.readObject();
+        // System.out.println("Usuário: " + user.getUsuario() + " Pass: " + user.getPassword());
 
         cliente.close();
 
