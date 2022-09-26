@@ -29,12 +29,19 @@ public class Cliente1 {
         System.out.println("Digite sua senha: ");
         senha = teclado.next();
 
+        PrintStream saida = new PrintStream(cliente.getOutputStream());
         Usuario user = new Usuario(idUser++, usuario, senha);
 
-        output = new ObjectOutputStream(cliente.getOutputStream());
-        output.writeObject(user);
-        output.flush();
-        output.close();
+        // Enviando usuário para o servidor
+        saida.println(user);
+        
+        
+
+
+
+
+
+
 
         cliente.close();
     }
