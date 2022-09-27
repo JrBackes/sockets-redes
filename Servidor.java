@@ -37,6 +37,10 @@ public class Servidor {
         jogos[4] = new Jogo(5, "Brasil de Pelotas", "Palmeiras", "12/10/2022", 1, 0);
         jogos[5] = new Jogo(6, "Juventude", "Caxias", "01/10/2022", 1, 1);
 
+        
+        //###########################################################
+        //PROBLEMA PARA RESOLVER É O TECLADO QUE TEM QUE VIR DO CLIENTE
+        //E COMO PASSAR OS DADOS DE CADA OPÇÃO DE VOLTA PARA O CLIENTE
         // Menu do jogo
         escolha = doCliente.read();
         if (escolha == 1) {
@@ -48,12 +52,14 @@ public class Servidor {
                 final SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                 final Date dataJogo = formato.parse(jogos[i].getData());
                 if (!dataAtual.before(dataJogo)) {
-                    jogos[i].getResultado();
+                    //jogos[i].getResultado();
+                    paraCliente.writeBytes(jogos[i].getResultado());//envia get resultado para cliente##TESTAR##
                     cont1++;
                 }
                 if (cont1 == 0) {
-                    System.out.println("  ");
-                    System.out.println("Não há partidas para exibir");
+                    paraCliente.writeBytes("Não há partidas para exibir");
+                    //System.out.println("  ");
+                    //System.out.println("Não há partidas para exibir");
                 }
 
             }
@@ -67,14 +73,16 @@ public class Servidor {
                 final SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                 final Date dataJogo = formato.parse(jogos[i].getData());
                 if (dataAtual.before(dataJogo)) {
-                    jogos[i].getPartida();
+                    //jogos[i].getPartida();
+                    paraCliente.writeBytes(jogos[i].getPartida());
                     cont++;
                 }
             }
 
             if (cont == 0) {
-                System.out.println("  ");
-                System.out.println("Infelizmente não há partidas para exibir");
+                paraCliente.writeBytes("Não há partidas para exibir");
+                //System.out.println("  ");
+                //System.out.println("Infelizmente não há partidas para exibir");
             }
         } else if (escolha == 3) {
             int valido = 0;

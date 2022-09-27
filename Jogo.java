@@ -61,12 +61,12 @@ public class Jogo{
         return golsVis;
     }
 
-    public void getPartida(){
+    public String getPartida(){
         System.out.println("ID: " + getId() + " | "+ getMandante() +" x " + getVisitante() + " ---------- Data: " + getData());
 
     }
 
-    public void getResultado(){
+    public String getResultado(){
         System.out.println("Resumo da Aposta: ");
         System.out.println("ID: " + getId() + " | "+ getMandante() + " " + getGolsMandante() + " x " + getGolsVisitante() +" "+getVisitante() + " ---------- Data: " + getData());
     }

@@ -12,6 +12,7 @@ public class Cliente1 {
         Scanner teclado = new Scanner(System.in);
 
         //Váriaveis para criação do usuário
+        String frase;
         int escolha = 0;
         String usuario = null;
         String senha = null;
@@ -46,6 +47,11 @@ public class Cliente1 {
             System.out.println("99 - Para sair");
             escolha = teclado.nextInt();
             paraServidor.writeByte(escolha);
+            frase = doServidor.readLine();
+            System.out.println(frase + "##TESTE##");
+
+
+        }
         
         //output = new ObjectOutputStream(cliente.getOutputStream());
         //output.writeObject(user);
@@ -59,8 +65,8 @@ public class Cliente1 {
             //System.out.println("Menu:" + (recebe.readObject()));
         //}
 
-        envia.flush();
-        envia.close();
+        paraServidor.flush();
+        paraServidor.close();
 
         cliente.close();
     }
