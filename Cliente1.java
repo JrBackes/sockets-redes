@@ -46,11 +46,10 @@ public class Cliente1 {
             System.out.println("3 - Fazer aposta");
             System.out.println("4 - Ver minhas apostas");
             System.out.println("99 - Para sair");
-            escolha = doUsuario.read();
+            escolha = teclado.nextInt();
             paraServidor.writeByte(escolha);
             frase = doServidor.readLine();
             System.out.println(frase + "##TESTE##");
-
 
         }
         

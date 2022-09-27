@@ -29,26 +29,26 @@ public class Servidor {
         Socket cliente = socketRecepcao.accept();
         BufferedReader doCliente = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
         DataOutputStream paraCliente = new DataOutputStream(cliente.getOutputStream());
-        // System.out.println("Cliente conectado: " +
+        System.out.println("Cliente conectado: " );
         // cliente.getInetAddress().getHostAddress());
 
         jogos[0] = new Jogo(1, "Internacional", "Bahia", "21/08/2022", 2, 3);
         jogos[1] = new Jogo(2, "Grêmio", "Vasco", "25/08/2022", 1, 2);
-        jogos[2] = new Jogo(3, "São Paulo", "Corinthians", "30/10/2022", 4, 1);
-        jogos[3] = new Jogo(4, "Flamengo", "Fluminense", "10/10/2022", 3, 1);
-        jogos[4] = new Jogo(5, "Brasil de Pelotas", "Palmeiras", "12/10/2022", 1, 0);
-        jogos[5] = new Jogo(6, "Juventude", "Caxias", "01/10/2022", 1, 1);
-
+        jogos[2] = new Jogo(3, "São Paulo", "Corinthians", "30/08/2022", 4, 1);
+        jogos[3] = new Jogo(4, "Flamengo", "Fluminense", "10/08/2022", 3, 1);
+        jogos[4] = new Jogo(5, "Brasil de Pelotas", "Palmeiras", "12/08/2022", 1, 0);
+        jogos[5] = new Jogo(6, "Juventude", "Caxias", "01/08/2022", 1, 1);
+        System.out.println("Jogos criados" );
         
         //###########################################################
         //PROBLEMA PARA RESOLVER É O TECLADO QUE TEM QUE VIR DO CLIENTE
         //E COMO PASSAR OS DADOS DE CADA OPÇÃO DE VOLTA PARA O CLIENTE
         // Menu do jogo
-        paraCliente.writeBytes(menu);
+        //paraCliente.writeBytes(menu);
         escolha = doCliente.read();
+        System.out.println("Escolha do cliente foi ==> " + escolha); //Até aqui ta certo, recebe o dado do cliente1
         while(true){
         if (escolha == 1) {
-
             // Validação de jogos que passaram **** FEITO
             int cont1 = 0;
             for (int i = 0; i < jogos.length; i++) {
@@ -56,12 +56,12 @@ public class Servidor {
                 final SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                 final Date dataJogo = formato.parse(jogos[i].getData());
                 if (!dataAtual.before(dataJogo)) {
-                    //jogos[i].getResultado();
+                    //jogos[i].getResultado(); EERRO POIS RETORNA UMA STRING
                     paraCliente.writeBytes(jogos[i].getResultado());//envia get resultado para cliente##TESTAR##
                     cont1++;
                 }
                 if (cont1 == 0) {
-                    paraCliente.writeBytes("Não há partidas para exibir");
+                    paraCliente.writeBytes("Não há partidas para exibir" + '\n');
                     break;
                     //System.out.println("  ");
                     //System.out.println("Não há partidas para exibir");
