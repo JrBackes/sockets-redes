@@ -9,6 +9,8 @@ public class Servidor {
 
     public static void main(String argv[]) throws Exception {
         // Usado durante o código
+        // Leitura do teclado para teste do codigo
+        Scanner teclado = new Scanner(System.in); // Clienteteste
         Jogo[] jogos = new Jogo[6];
         Aposta[] apostas = new Aposta[6];
         Usuario user;
@@ -42,7 +44,9 @@ public class Servidor {
         //PROBLEMA PARA RESOLVER É O TECLADO QUE TEM QUE VIR DO CLIENTE
         //E COMO PASSAR OS DADOS DE CADA OPÇÃO DE VOLTA PARA O CLIENTE
         // Menu do jogo
+        paraCliente.writeBytes(menu);
         escolha = doCliente.read();
+        while(true){
         if (escolha == 1) {
 
             // Validação de jogos que passaram **** FEITO
@@ -58,6 +62,7 @@ public class Servidor {
                 }
                 if (cont1 == 0) {
                     paraCliente.writeBytes("Não há partidas para exibir");
+                    break;
                     //System.out.println("  ");
                     //System.out.println("Não há partidas para exibir");
                 }
@@ -81,9 +86,12 @@ public class Servidor {
 
             if (cont == 0) {
                 paraCliente.writeBytes("Não há partidas para exibir");
+                break;
                 //System.out.println("  ");
                 //System.out.println("Infelizmente não há partidas para exibir");
-            }
+            }}
+
+            /* 
         } else if (escolha == 3) {
             int valido = 0;
 
@@ -161,8 +169,8 @@ public class Servidor {
                 System.out.println(" ");
                 System.out.println("Estas são todas as suas apostas");
             }
-        }
-
+        }*/
+    }//fim do while
         cliente.close();
         socketRecepcao.close();
 

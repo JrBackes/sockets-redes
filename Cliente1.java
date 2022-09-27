@@ -34,6 +34,7 @@ public class Cliente1 {
         senha = teclado.next();
 
         Usuario user = new Usuario(idUser++, usuario, senha);
+        System.out.println(user);
         DataOutputStream paraServidor = new DataOutputStream(cliente.getOutputStream());
         BufferedReader doServidor = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
         // Estrutura Menu
@@ -45,7 +46,7 @@ public class Cliente1 {
             System.out.println("3 - Fazer aposta");
             System.out.println("4 - Ver minhas apostas");
             System.out.println("99 - Para sair");
-            escolha = teclado.nextInt();
+            escolha = doUsuario.read();
             paraServidor.writeByte(escolha);
             frase = doServidor.readLine();
             System.out.println(frase + "##TESTE##");
@@ -67,7 +68,7 @@ public class Cliente1 {
 
         paraServidor.flush();
         paraServidor.close();
-
+        teclado.close();
         cliente.close();
     }
 }
