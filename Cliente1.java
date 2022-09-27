@@ -12,14 +12,17 @@ public class Cliente1 {
         Scanner teclado = new Scanner(System.in);
 
         //Váriaveis para criação do usuário
+        int escolha = 0;
         String usuario = null;
         String senha = null;
         int idUser = 1;
+        Jogo j;
 
         //Variaveis para conexão
         ObjectOutputStream output;
 
         // Inicialização da conexão
+        BufferedReader doUsuario = new BufferedReader(new InputStreamReader(System.in)); 
         Socket cliente = new Socket("127.0.0.1", 6789);
 
         //Processo de criação do usuário
@@ -30,18 +33,31 @@ public class Cliente1 {
         senha = teclado.next();
 
         Usuario user = new Usuario(idUser++, usuario, senha);
-
+        DataOutputStream paraServidor = new DataOutputStream(cliente.getOutputStream());
+        BufferedReader doServidor = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
+        // Estrutura Menu
+        while (escolha != 99) {
+            System.out.println("  ");
+            System.out.println("Selecione uma opção abaixo:");
+            System.out.println("1 - Ver resultados");
+            System.out.println("2 - Ver partidas");
+            System.out.println("3 - Fazer aposta");
+            System.out.println("4 - Ver minhas apostas");
+            System.out.println("99 - Para sair");
+            escolha = teclado.nextInt();
+            paraServidor.writeByte(escolha);
+        
         //output = new ObjectOutputStream(cliente.getOutputStream());
         //output.writeObject(user);
 
-        ObjectInputStream recebe = new ObjectInputStream(cliente.getInputStream());
-        ObjectOutputStream envia = new ObjectOutputStream(cliente.getOutputStream());
+        //ObjectInputStream recebe = new ObjectInputStream(cliente.getInputStream());
+        //ObjectOutputStream envia = new ObjectOutputStream(cliente.getOutputStream());
 
-        envia.writeObject(user);
+        //envia.writeObject(user);
 
-        if(recebe != null){
-            System.out.println("Menu:" + (recebe.readObject()));
-        }
+        //if(recebe != null){
+            //System.out.println("Menu:" + (recebe.readObject()));
+        //}
 
         envia.flush();
         envia.close();
