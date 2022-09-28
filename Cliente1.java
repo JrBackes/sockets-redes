@@ -49,7 +49,7 @@ public class Cliente1 {
             escolha = teclado.nextInt();
             paraServidor.writeByte(escolha);
             frase = doServidor.readLine();
-            System.out.println(frase + "##TESTE##");
+            System.out.println(frase + '\n');
 
         }
         

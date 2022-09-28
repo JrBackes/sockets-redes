@@ -68,7 +68,7 @@ public class Jogo{
     }
 
     public String getResultado(){
-        System.out.println("Resumo da Aposta: ");
+        //System.out.println("Resumo da Aposta: ");
         String retorno = ("ID: " + getId() + " | "+ getMandante() + " " + getGolsMandante() + " x " + getGolsVisitante() +" "+getVisitante() + " ---------- Data: " + getData());
         return retorno;
     }
