@@ -32,12 +32,12 @@ public class Servidor {
         System.out.println("Cliente conectado: " );
         // cliente.getInetAddress().getHostAddress());
 
-        jogos[0] = new Jogo(1, "Internacional", "Bahia", "21/08/2022", 2, 3);
-        jogos[1] = new Jogo(2, "Grêmio", "Vasco", "25/08/2022", 1, 2);
-        jogos[2] = new Jogo(3, "São Paulo", "Corinthians", "30/08/2022", 4, 1);
-        jogos[3] = new Jogo(4, "Flamengo", "Fluminense", "10/08/2022", 3, 1);
-        jogos[4] = new Jogo(5, "Brasil de Pelotas", "Palmeiras", "12/08/2022", 1, 0);
-        jogos[5] = new Jogo(6, "Juventude", "Caxias", "01/08/2022", 1, 1);
+        jogos[0] = new Jogo(1, "Internacional", "Bahia", "21/10/2022", 2, 3);
+        jogos[1] = new Jogo(2, "Grêmio", "Vasco", "25/10/2022", 1, 2);
+        jogos[2] = new Jogo(3, "São Paulo", "Corinthians", "30/10/2022", 4, 1);
+        jogos[3] = new Jogo(4, "Flamengo", "Fluminense", "10/10/2022", 3, 1);
+        jogos[4] = new Jogo(5, "Brasil de Pelotas", "Palmeiras", "12/10/2022", 1, 0);
+        jogos[5] = new Jogo(6, "Juventude", "Caxias", "01/10/2022", 1, 1);
         System.out.println("Jogos criados" );
         
         //###########################################################
@@ -47,7 +47,8 @@ public class Servidor {
         //paraCliente.writeBytes(menu);
         escolha = doCliente.read();
         System.out.println("Escolha do cliente foi ==> " + escolha); //Até aqui ta certo, recebe o dado do cliente1
-        while(true){
+        
+        
         if (escolha == 1) {
             // Validação de jogos que passaram **** FEITO
             int cont1 = 0;
@@ -56,9 +57,12 @@ public class Servidor {
                 final SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                 final Date dataJogo = formato.parse(jogos[i].getData());
                 if (!dataAtual.before(dataJogo)) {
-                    //jogos[i].getResultado(); EERRO POIS RETORNA UMA STRING
+                    System.out.println("passou vezes  " + cont1);
                     paraCliente.writeBytes(jogos[i].getResultado());//envia get resultado para cliente##TESTAR##
                     cont1++;
+                } else if(cont1 != 0){
+                    break;
+
                 }
                 if (cont1 == 0) {
                     paraCliente.writeBytes("Não há partidas para exibir" + '\n');
@@ -73,7 +77,6 @@ public class Servidor {
             // OK
             int cont = 0;
             for (int i = 0; i < jogos.length; i++) {
-
                 final Date dataAtual = new Date();
                 final SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                 final Date dataJogo = formato.parse(jogos[i].getData());
@@ -81,15 +84,19 @@ public class Servidor {
                     //jogos[i].getPartida();
                     paraCliente.writeBytes(jogos[i].getPartida());
                     cont++;
+                } else if(cont !=0){
+                    break;
                 }
-            }
+           
 
             if (cont == 0) {
                 paraCliente.writeBytes("Não há partidas para exibir");
                 break;
                 //System.out.println("  ");
                 //System.out.println("Infelizmente não há partidas para exibir");
-            }}
+            }
+        } 
+    } 
 
             /* 
         } else if (escolha == 3) {
@@ -170,7 +177,7 @@ public class Servidor {
                 System.out.println("Estas são todas as suas apostas");
             }
         }*/
-    }//fim do while
+    //fim do while
         cliente.close();
         socketRecepcao.close();
 
