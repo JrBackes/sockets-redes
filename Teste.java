@@ -45,10 +45,11 @@ public class Teste {
 
         // Menu
         // OK - Opção 1 - Ver todos resultados;
-        // Fazer validação sobre os jogos que ele já apostou;
-        // Mostrar somente após a data;
+            // Fazer validação sobre os jogos que ele já apostou;
+            // Mostrar somente após a data;
         // OK - Opção 2 - Ver todas as partidas;
         // OK - Opção 3 - Fazer apostas;
+        // Ok - Opção 4 - Sair
 
         // OK - Fazer contador para ser o id da aposta
         // Estrutura Menu
@@ -71,7 +72,7 @@ public class Teste {
                     final SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                     final Date dataJogo = formato.parse(jogos[i].getData());
                     if (!dataAtual.before(dataJogo)) {
-                        jogos[i].getResultado();
+                        System.out.print(jogos[i].getResultado());
                         cont1++;
                     }
                     if (cont1 == 0) {
@@ -90,7 +91,7 @@ public class Teste {
                     final SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                     final Date dataJogo = formato.parse(jogos[i].getData());
                     if (dataAtual.before(dataJogo)) {
-                        jogos[i].getPartida();
+                        System.out.print(jogos[i].getPartida());
                         cont++;
                     }
                 }
