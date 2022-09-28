@@ -62,13 +62,15 @@ public class Jogo{
     }
 
     public String getPartida(){
-        System.out.println("ID: " + getId() + " | "+ getMandante() +" x " + getVisitante() + " ---------- Data: " + getData());
+        String retorno = ("ID: " + getId() + " | "+ getMandante() +" x " + getVisitante() + " ---------- Data: " + getData());
+        return retorno;
 
     }
 
     public String getResultado(){
         System.out.println("Resumo da Aposta: ");
-        System.out.println("ID: " + getId() + " | "+ getMandante() + " " + getGolsMandante() + " x " + getGolsVisitante() +" "+getVisitante() + " ---------- Data: " + getData());
+        String retorno = ("ID: " + getId() + " | "+ getMandante() + " " + getGolsMandante() + " x " + getGolsVisitante() +" "+getVisitante() + " ---------- Data: " + getData());
+        return retorno;
     }
     
 
